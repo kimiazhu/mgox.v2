@@ -97,16 +97,32 @@ func (c PropertyReader) Read(key string) string {
 	return v
 }
 
+// Config 用于直接传递数据库参数来配置数据库
+func Config(host, dbname, username, userpass string) {
+	DBConfig.Host = host
+	DBConfig.Database = dbname
+	DBConfig.Username = username
+	DBConfig.Password = userpass
+	if host != "" {
+		log4go.Debug(fmt.Sprintf("host=%s,database=%s,username=%s,password=***\n", DBConfig.Host, DBConfig.Database, DBConfig.Username))
+	}
+}
+
+// LoadConfig 支持从配置文件读取mongodb配置
 func LoadConfig(path string) {
 	db := new(PropertyReader)
 	db.init(path)
-	DBConfig.Host = db.m["host"]
-	DBConfig.Database = db.m["database"]
-	DBConfig.Username = db.m["username"]
-	DBConfig.Password = db.m["password"]
-	log4go.Debug(fmt.Sprintf("host=%s,database=%s,username=%s\n", DBConfig.Host, DBConfig.Database, DBConfig.Username))
+	Config(db.m["host"], db.m["database"], db.m["username"], db.m["password"])
 }
 
+
+// init 方法会自动在当前目录,以及当前目录下的conf目录中查找mgox.properties文件并读取其中的信息
 func init() {
-	LoadConfig("conf/mgox.properties")
+	if _, err := os.Stat("mgox.properties"); err == nil {
+		LoadConfig("mgox.properties")
+	} else if _, err = os.Stat("conf/mgox.properties"); err == nil {
+		LoadConfig("conf/mgox.properties")
+	} else {
+		log4go.Info("config file cannot be discovered, you need to load it by yourself")
+	}
 }
