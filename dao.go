@@ -444,7 +444,8 @@ func (q *Query) Select(columns ...string) *Query {
     return q
 }
 
-func (q *Query) SelectExclude(exColumns ...string) *Query {
+// SelectN exclude fields by given name
+func (q *Query) SelectN(exColumns ...string) *Query {
     q.exColumns = exColumns
     return q
 }

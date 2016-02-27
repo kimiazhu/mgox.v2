@@ -1,5 +1,5 @@
 
-## mgox
+## mgox.v2
 
 mgox.v2 is a friendly wapper of [mgo.v2](http://gopkg.in/mgo.v2).
 
@@ -16,6 +16,7 @@ this project is a custom version of [mgox](http://github.com/yaosxi/mgox)
 * Set/Inc/Push/Pull/Replace
 * Find
 * Get
+* Select/SelectN/Limit/Sort
 
 ## Example
 
