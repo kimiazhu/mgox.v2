@@ -1,11 +1,11 @@
 package mgox_test
 
 import (
+	"fmt"
 	"github.com/yaosxi/mgox"
 	"gopkg.in/mgo.v2/bson"
 	"testing"
 	"time"
-	"fmt"
 )
 
 func handleError(t *testing.T, err error) bool {
@@ -18,14 +18,13 @@ func handleError(t *testing.T, err error) bool {
 }
 
 type Log4go struct {
-
 }
 
-func (log Log4go)Debug(v interface{})  {
+func (log Log4go) Debug(v interface{}) {
 	fmt.Println(v)
 }
 
-func (log Log4go)Critical(v interface{})  {
+func (log Log4go) Critical(v interface{}) {
 	fmt.Println("*************** Error ***************")
 	fmt.Println(v)
 	fmt.Println("*************** Error ***************")
@@ -47,8 +46,8 @@ type User struct {
 }
 
 type IpCache struct {
-	Ip           string `json:"ip" bson:"_id,omitempty"`
-	Country         string        `json:"country"`
+	Ip      string `json:"ip" bson:"_id,omitempty"`
+	Country string `json:"country"`
 }
 
 func getFirst() User {

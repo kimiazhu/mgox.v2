@@ -10,9 +10,8 @@ import (
 
 var (
 	dbSession *mgo.Session
-	lock = sync.Mutex{}
+	lock      = sync.Mutex{}
 )
-
 
 func GetDatabase() (*mgo.Database, error) {
 	lock.Lock()

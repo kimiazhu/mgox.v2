@@ -2,11 +2,11 @@ package mgox
 
 import (
 	"bufio"
+	"fmt"
 	"github.com/kimiazhu/log4go"
 	"io"
 	"os"
 	"strings"
-	"fmt"
 )
 
 type dbconfig struct {
@@ -114,7 +114,6 @@ func LoadConfig(path string) {
 	db.init(path)
 	Config(db.m["host"], db.m["database"], db.m["username"], db.m["password"])
 }
-
 
 // init 方法会自动在当前目录,以及当前目录下的conf目录中查找mgox.properties文件并读取其中的信息
 func init() {
